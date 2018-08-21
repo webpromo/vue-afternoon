@@ -1,32 +1,63 @@
 <template>
   <div id="app">
     <header>
-      <div><button>CREATE</button></div>
+      <div><button @click='toggle("form")'>CREATE</button></div>
       <div><span style="font-size:14pt;">Battle Bots</span></div>
-      <div><button>COLLECTION</button></div>
+      <div><button @click='toggle("collection")'>COLLECTION</button></div>
     </header>
 
-    <section class="formBox">
-      <div class="formElement">Bot Name* <input /></div>
-      <div class="formElement">Attack Value* <input /></div>
-      <div class="formElement">Health Value* <input /></div>
-      <div class="formElement"><button>SUBMIT</button> &nbsp; <button>CLEAR</button></div>
+      <form class='formBox' @submit.prevent='createBot'>
+        <div class="formElement">Bot Name* <input 
+            v-model='name' 
+            type="text" 
+            placeholder="enter the bot's name"></div>
+        
+        <div class="formElement">Attack Value* <input
+            v-model='attack' 
+            type="text" 
+            placeholder="enter numbers"></div>
 
-    
-      
-    </section>
+        <div class="formElement">Health Value* <input
+            v-model='health' 
+            type="text" 
+            placeholder="enter numbers"></div>
+        <div class="formElement"><button>SUBMIT</button> &nbsp; <button>CLEAR</button></div>
+
+    </form>
     
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Bot from './components/Bot';
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
-  }
+  data() {
+    return {
+      showForm: true,
+      bot: '',
+      blogPost: '',
+      botClub: []
+    };
+  },
+  methods: {
+    toggle(val) {
+      this.showForm = val === 'form' ? true : false;
+    },
+    createBot() {
+      let newBot = {
+        name: this.name,
+        attack: this.attack,
+        health: this.health
+      };
+      this.posts.push(newPost);
+      this.author = '';
+      this.blogPost = '';
+      this.showForm = false;
+    }
+  },
+  components: { Bot } // {Bot: Bot}
 }
 </script>
 
